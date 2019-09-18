@@ -115,7 +115,12 @@ class ETransactions extends PaymentModule
             }
         }
 
-        return $this->getImagePath() . $type . '.' . $ext;
+        $image_url = $this->getImagePath() . $type . '.' . $ext;
+        $image_theme_url =  '/modules/'.$this->name. '/img/' . $type . '.' . $ext;
+        if (Tools::file_exists_cache(_PS_THEME_DIR_ . $image_theme_url)) {
+            $image_url = '/themes/'. _THEME_NAME_ .'/'. $image_theme_url;
+        }
+        return $image_url;
     }
 
     public function getPath()
